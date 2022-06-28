@@ -27,6 +27,47 @@ function getCriteria() {
 }
 
 
+function generateCharacterPool(lowerBool,upperBool,numericBool,specialBool) {
+  if (lowerBool) {
+    lower='abcdefghijklmnopqrstuvwxyz'
+  } else {
+    lower=''
+  }
+
+  if (upperBool) {
+    upper='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  } else {
+    upper=''
+  }
+  if (numericBool) {
+    numeric='0123456789'
+  } else {
+    numeric=''
+  }
+  if (specialBool) {
+    special='&%*+=-?,.'
+  } else {
+    special=''
+  }
+  return lower + upper + special + numeric
+}
+
+function samplePool(pool,n) {
+  pass=[]
+  for (let i=0; i< n; i++) {
+    randIndex=Math.floor(Math.random() * pool.length)
+    pass.push(pool[randIndex])
+  }
+  return pass.join('')
+}
+
+function generatePassword() {
+  criteria=getCriteria()
+  pool=generateCharacterPool(criteria.lower,criteria.upper,criteria.numeric,criteria.special)
+  password = samplePool(pool,criteria.length)
+  return password
+}
+
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
