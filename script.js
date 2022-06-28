@@ -1,3 +1,5 @@
+
+// function to grap user criteria
 function getCriteria() {
   let passLength=prompt("How long do you want your passcode to be? values 8-128 accepted.")
   passLength=Number(passLength)
@@ -16,6 +18,7 @@ function getCriteria() {
     numericBool=confirm("Would you like to include numeric characters? Okay for yes, cancel for no.")
     specialBool=confirm("Would you like to include special characters? Okay for yes, cancel for no.")  
   }
+  // keep all user criteria in an object
   let criteria = {
     length: passLength,
     upper: upperBool,
@@ -26,7 +29,7 @@ function getCriteria() {
   return criteria
 }
 
-
+// function to generate the character pool
 function generateCharacterPool(lowerBool,upperBool,numericBool,specialBool) {
   if (lowerBool) {
     lower='abcdefghijklmnopqrstuvwxyz'
@@ -45,13 +48,14 @@ function generateCharacterPool(lowerBool,upperBool,numericBool,specialBool) {
     numeric=''
   }
   if (specialBool) {
-    special='&%*+=-?,.'
+    special=" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
   } else {
     special=''
   }
   return lower + upper + special + numeric
 }
 
+// function to sample at random from the sample space
 function samplePool(pool,n) {
   pass=[]
   for (let i=0; i< n; i++) {
@@ -61,6 +65,7 @@ function samplePool(pool,n) {
   return pass.join('')
 }
 
+// wrapper function to execute all previous functions at once
 function generatePassword() {
   criteria=getCriteria()
   pool=generateCharacterPool(criteria.lower,criteria.upper,criteria.numeric,criteria.special)
